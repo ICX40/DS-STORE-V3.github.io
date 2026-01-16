@@ -13,22 +13,59 @@
         body { font-family: 'Cairo', sans-serif; margin: 0; background: var(--bg-body); color: var(--text-white); min-height: 100vh; overflow-x: hidden; }
 
         /* Header Desktop */
-        .custom-header { background: rgba(10, 10, 20, 0.95); backdrop-filter: blur(10px); padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(88, 101, 242, 0.3); position: sticky; top: 0; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
-        .logo { font-size: 26px; font-weight: 900; color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .logo-icon { color: var(--page-color); filter: drop-shadow(0 0 5px var(--page-color)); }
-        .header-center { flex-grow: 1; display: flex; justify-content: center; }
-        .nav-link { color: var(--text-gray); text-decoration: none; font-weight: 700; margin: 0 20px; transition: 0.3s; position: relative; font-size: 16px; }
-        .nav-link:hover, .nav-link.active { color: white; text-shadow: 0 0 10px var(--page-color); }
-        .nav-link.active::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px; background: var(--page-color); box-shadow: 0 0 10px var(--page-color); }
-        .header-left { display: flex; align-items: center; gap: 15px; }
-        .search-container { position: relative; }
-        .search-input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 10px 40px 10px 15px; border-radius: 50px; color: white; width: 220px; outline: none; font-family: 'Cairo'; transition: 0.3s; }
-        .search-input:focus { border-color: var(--page-color); box-shadow: 0 0 10px rgba(88, 101, 242, 0.2); width: 260px; }
-        .search-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--text-gray); }
-        .action-btn { background: rgba(88, 101, 242, 0.1); color: var(--page-color); border: 1px solid var(--page-color); text-decoration: none; padding: 8px 20px; border-radius: 50px; display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; transition: 0.3s; cursor: pointer; }
-        .action-btn:hover { background: var(--page-color); color: white; box-shadow: 0 0 20px var(--page-color); transform: translateY(-2px); }
-        .cart-count { background: #ffffff; color: black; padding: 2px 6px; border-radius: 50%; font-size: 10px; position: absolute; top: -5px; left: -5px; }
+        .custom-header {
+            background: rgba(5, 5, 5, 0.90);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 10px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+            position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); gap: 10px;
+        }
 
+        .logo {
+            font-size: 22px; font-weight: 900; color: #fff; text-decoration: none;
+            text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px;
+            flex-shrink: 0;
+        }
+        .logo i { color: var(--primary); filter: drop-shadow(0 0 8px var(--primary)); }
+
+        .header-center { flex-grow: 1; display: flex; justify-content: center; }
+        .nav-link {
+            color: var(--text-muted); text-decoration: none; font-weight: 700; margin: 0 10px;
+            transition: 0.3s; position: relative; font-size: 15px; white-space: nowrap;
+        }
+        .nav-link:hover, .nav-link.active { color: #fff; text-shadow: 0 0 10px var(--primary); }
+        .nav-link.active::after {
+            content: ''; position: absolute; width: 100%; height: 2px; bottom: -5px; left: 0;
+            background: var(--primary); box-shadow: 0 0 10px var(--primary);
+        }
+
+        .header-left { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+        .search-container { position: relative; }
+        .search-input {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 30px 8px 15px; border-radius: 30px; color: white; 
+            width: 170px; outline: none; font-family: var(--font-main); transition: 0.4s; font-size: 13px;
+        }
+        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 15px var(--primary-glow); width: 220px; }
+        .search-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #777; font-size: 12px; }
+
+        .action-btn {
+            background: transparent; color: var(--text-main); border: 1px solid rgba(255,255,255,0.2);
+            padding: 6px 15px; border-radius: 30px; font-weight: 700; font-size: 13px;
+            text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 6px; position: relative;
+            cursor: pointer; white-space: nowrap;
+        }
+        .action-btn:hover {
+            border-color: var(--primary); background: var(--primary-glow); color: #fff;
+            box-shadow: 0 0 20px var(--primary-glow); transform: translateY(-2px);
+        }
+        .cart-count {
+            background: var(--primary); color: #000; padding: 2px 5px; border-radius: 50%;
+            font-size: 10px; font-weight: bold; position: absolute; top: -8px; left: -5px;
+        }
         /* Hero */
         .page-header { text-align: center; margin-bottom: 50px; background: linear-gradient(135deg, #101020, #2c2c54); padding: 80px 20px; border-bottom: 1px solid var(--page-color); position: relative; overflow: hidden; box-shadow: 0 0 30px rgba(88, 101, 242, 0.2); }
         .page-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at center, rgba(88, 101, 242, 0.15), transparent); }
@@ -169,11 +206,13 @@
             <a href="subscriptions.html" class="nav-link">اشتراكات</a>
             <a href="charging.html" class="nav-link">شحن</a>
             <a href="discord.html" class="nav-link active">Nitro</a>
+                    <a href="contact.html" class="nav-link">تواصل معنا</a>
         </nav></div>
         <div class="header-left">
             <div class="search-container"><i class="fas fa-search search-icon"></i><input type="text" class="search-input" placeholder="ابحث عن الالعاب..."></div>
             <a href="#" class="action-btn" onclick="event.preventDefault(); toggleCart(true);"><span class="cart-count">0</span>السله <i class="fas fa-shopping-cart"></i></a>
             <a href="#" class="action-btn" onclick="event.preventDefault(); toggleOrders(true);">طلباتي <i class="fas fa-box-open"></i></a>
+            <button id="loginBtn" class="action-btn" type="button">تسجيل دخول</button>
         </div>
     </header>
 
@@ -250,14 +289,12 @@
 
     <script>
         function openModal(t,p,i){
-            document.getElementById('buyModal').style.display='flex';
-            document.getElementById('modal-title').innerText=t;
-            document.getElementById('modal-price').innerText=p;
-            document.getElementById('hidden-product').value=t;
-            document.getElementById('hidden-price').value=p;
-            document.getElementById('modal-img').src=i||'https://via.placeholder.com/80';
-            document.getElementById('status').innerText="";
-            selectPayment(document.querySelector('.payment-option'), 'Vodafone Cash');
+            goToCheckout(t,p,i);
+        }
+        function goToCheckout(title, price, img){
+            const item = { title: title, price: price, img: (img||''), from: (location.pathname||''), ts: Date.now() };
+            localStorage.setItem('ds_checkout_item', JSON.stringify(item));
+            window.location.href = 'checkout.html';
         }
         function closeModal(){document.getElementById('buyModal').style.display='none';}
         
@@ -318,5 +355,42 @@
         });
     </script>
     <script type="text/javascript">var Tawk_API=Tawk_API||{},Tawk_LoadStart=new Date();(function(){var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];s1.async=true;s1.src='https://embed.tawk.to/694811440b00e71980bdd281/1jd0o6tfe';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);})();</script>
+
+  <script type="module" src="auth-modal.js"></script>
+
+<script>
+  // Auto-highlight the current page link in the header + sidebar
+  (function(){
+    function normalizeHref(href){
+      if(!href) return "";
+      const clean = href.split('#')[0].split('?')[0];
+      return clean.split('/').pop();
+    }
+
+    function currentPage(){
+      let p = (window.location.pathname || "").split('/').pop();
+      p = p.split('#')[0].split('?')[0];
+      if(!p) p = "index.html";
+      return p;
+    }
+
+    function markActive(selector){
+      const cur = currentPage();
+      document.querySelectorAll(selector).forEach(a => {
+        const target = normalizeHref(a.getAttribute('href'));
+        if(!target) return;
+        if(target === cur || (cur === "index.html" && (target === "" || target === "/"))){
+          a.classList.add('active');
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      markActive('a.nav-link');
+      markActive('a.sidebar-link');
+    });
+  })();
+</script>
+
 </body>
 </html>

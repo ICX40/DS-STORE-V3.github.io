@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>تسجيل الدخول - DS STORE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0a0a0a;--card:#141414;--line:#333;--gold:#ffd700;--muted:#b0b0c0; --primary: var(--page-color); --primary-glow: rgba(255,255,255,0.08); --text-muted: #b0b0c0; --text-main: #ffffff; --font-main: 'Cairo', sans-serif; }
+    body{font-family:'Cairo',system-ui;background:var(--bg);color:#fff;margin:0;display:grid;place-items:center;min-height:100vh;padding:20px}
+    .box{width:min(420px,92vw);background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 10px 40px rgba(0,0,0,.55)}
+    h2{margin:0 0 12px;color:var(--gold)}
+    .sub{color:var(--muted);font-size:13px;margin:0 0 14px}
+    input{width:100%;padding:12px 12px;border-radius:12px;border:1px solid var(--line);background:#1a1a1a;color:#fff;box-sizing:border-box;margin:8px 0;outline:none}
+    input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,215,0,.12)}
+    .row{display:flex;gap:10px;margin-top:10px}
+    button{flex:1;padding:12px;border:0;border-radius:12px;font-weight:800;cursor:pointer;font-family:'Cairo';}
+    #login{background:var(--gold);color:#000}
+    #signup{background:#2b2b2b;color:#fff;border:1px solid var(--line)}
+    #msg{margin-top:12px;min-height:22px;font-weight:800}
+    a{color:var(--muted);text-decoration:none;display:inline-block;margin-top:14px}
+  
+    /* Active nav link */
+    .nav-link.active{ position:relative; color: var(--page-color); text-shadow: 0 0 12px rgba(255, 215, 0, 0.25); }
+    .nav-link.active::after{ content:""; position:absolute; left:10%; right:10%; bottom:-10px; height:3px; background: var(--page-color); border-radius: 999px; box-shadow: 0 0 14px rgba(255, 215, 0, 0.25); }
+    .sidebar-link.active{ color: var(--page-color); }
+    .sidebar-link.active i{ color: var(--page-color); }
+</style>
+</head>
+<body>
+  <div class="box">
+    <h2>تسجيل الدخول</h2>
+    <p class="sub">لو معندكش حساب اعمل Sign Up بنفس الإيميل والباسورد.</p>
+
+    <input id="email" type="email" placeholder="Email" autocomplete="email" />
+    <input id="pass" type="password" placeholder="Password" autocomplete="current-password" />
+
+    <div class="row">
+      <button id="login">Login</button>
+      <button id="signup">Sign Up</button>
+    </div>
+
+    <div id="msg"></div>
+    <a href="index.html">رجوع للرئيسية</a>
+  </div>
+
+<div class="mobile-sidebar" id="mobileSidebar">
+        <div class="sidebar-header">
+            <h3>القائمة</h3>
+            <span class="close-sidebar" onclick="toggleSidebar()">&times;</span>
+        </div>
+        <div class="sidebar-content">
+            <a href="index.html" class="sidebar-link"><i class="fas fa-home"></i> الرئيسية</a>
+            <a href="games.html" class="sidebar-link"><i class="fas fa-gamepad"></i> ألعاب PC</a>
+            <a href="subscriptions.html" class="sidebar-link"><i class="fas fa-crown"></i> اشتراكات</a>
+            <a href="charging.html" class="sidebar-link"><i class="fas fa-bolt"></i> شحن</a>
+            <a href="discord.html" class="sidebar-link"><i class="fab fa-discord"></i> Nitro</a>
+            <a href="contact.html" class="sidebar-link"><i class="fas fa-headset"></i> تواصل معنا</a>
+        </div>
+    </div>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<script type="module" src="firebase.js"></script>
+<script>
+  const msg = document.getElementById("msg");
+
+  // بدل ما نرجع للرئيسية، نعرض حالة الحساب
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      if (!window.fb) return;
+
+      window.fb.onAuth((user) => {
+        if (user) {
+          msg.style.color = "#25D366";
+          msg.textContent = "أنت مسجّل دخول بالفعل ✅";
+          // ممكن كمان تخفي أزرار login/signup
+          document.getElementById("login").style.display = "none";
+          document.getElementById("signup").style.display = "none";
+        }
+      });
+    }, 0);
+  });
+</script>
+
+
+<script>
+  // Header helpers (for pages without full cart/orders modals)
+  function toggleSidebar(){
+    const s=document.getElementById('mobileSidebar'), o=document.getElementById('sidebarOverlay');
+    if(!s||!o) return;
+    s.classList.toggle('active');
+    o.classList.toggle('active');
+  }
+  function toggleCart(){ window.location.href='index.html'; }
+  function toggleOrders(){ window.location.href='index.html'; }
+  (function(){
+    try {
+      const cart = JSON.parse(localStorage.getItem('ds_cart')||'[]');
+      document.querySelectorAll('.cart-count').forEach(b=>b.textContent=cart.length);
+    } catch(e) {}
+  })();
+</script>
+
+
+<script>
+  // Auto-highlight the current page link in the header + sidebar
+  (function(){
+    function normalizeHref(href){
+      if(!href) return "";
+      const clean = href.split('#')[0].split('?')[0];
+      return clean.split('/').pop();
+    }
+
+    function currentPage(){
+      let p = (window.location.pathname || "").split('/').pop();
+      p = p.split('#')[0].split('?')[0];
+      if(!p) p = "index.html";
+      return p;
+    }
+
+    function markActive(selector){
+      const cur = currentPage();
+      document.querySelectorAll(selector).forEach(a => {
+        const target = normalizeHref(a.getAttribute('href'));
+        if(!target) return;
+        if(target === cur || (cur === "index.html" && (target === "" || target === "/"))){
+          a.classList.add('active');
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      markActive('a.nav-link');
+      markActive('a.sidebar-link');
+    });
+  })();
+</script>
+
+</body>
+</html>

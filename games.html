@@ -9,25 +9,63 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         /* --- General Theme (Gold/Dark Glass) --- */
-        :root { --page-color: #ffd700; --bg-body: linear-gradient(135deg, #050505 0%, #101015 100%); --glass-bg: rgba(20, 20, 30, 0.7); --glass-border: 1px solid rgba(255, 255, 255, 0.08); --text-white: #ffffff; --text-gray: #b0b0c0; }
+        :root {--page-color: #ffd700; --bg-body: linear-gradient(135deg, #050505 0%, #101015 100%); --glass-bg: rgba(20, 20, 30, 0.7); --glass-border: 1px solid rgba(255, 255, 255, 0.08); --text-white: #ffffff; --text-gray: #b0b0c0; --primary: var(--page-color); --primary-glow: rgba(255,255,255,0.08); --text-muted: #b0b0c0; --text-main: #ffffff; --font-main: 'Cairo', sans-serif; }
         body { font-family: 'Cairo', sans-serif; margin: 0; background: var(--bg-body); color: var(--text-white); min-height: 100vh; overflow-x: hidden; }
 
         /* Header Desktop */
-        .custom-header { background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px); padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 215, 0, 0.3); position: sticky; top: 0; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
-        .logo { font-size: 26px; font-weight: 900; color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .logo-icon { color: var(--page-color); filter: drop-shadow(0 0 5px var(--page-color)); }
+        .custom-header {
+            background: rgba(5, 5, 5, 0.90);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 10px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+            position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); gap: 10px;
+        }
+
+        .logo {
+            font-size: 22px; font-weight: 900; color: #fff; text-decoration: none;
+            text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px;
+            flex-shrink: 0;
+        }
+        .logo i { color: var(--primary); filter: drop-shadow(0 0 8px var(--primary)); }
+
         .header-center { flex-grow: 1; display: flex; justify-content: center; }
-        .nav-link { color: var(--text-gray); text-decoration: none; font-weight: 700; margin: 0 20px; transition: 0.3s; position: relative; font-size: 16px; }
-        .nav-link:hover, .nav-link.active { color: white; text-shadow: 0 0 10px var(--page-color); }
-        .nav-link.active::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px; background: var(--page-color); box-shadow: 0 0 10px var(--page-color); }
-        .header-left { display: flex; align-items: center; gap: 15px; }
+        .nav-link {
+            color: var(--text-muted); text-decoration: none; font-weight: 700; margin: 0 10px;
+            transition: 0.3s; position: relative; font-size: 15px; white-space: nowrap;
+        }
+        .nav-link:hover, .nav-link.active { color: #fff; text-shadow: 0 0 10px var(--primary); }
+        .nav-link.active::after {
+            content: ''; position: absolute; width: 100%; height: 2px; bottom: -5px; left: 0;
+            background: var(--primary); box-shadow: 0 0 10px var(--primary);
+        }
+
+        .header-left { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
         .search-container { position: relative; }
-        .search-input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 10px 40px 10px 15px; border-radius: 50px; color: white; width: 220px; outline: none; font-family: 'Cairo'; transition: 0.3s; }
-        .search-input:focus { border-color: var(--page-color); box-shadow: 0 0 10px rgba(255, 215, 0, 0.2); width: 260px; }
-        .search-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--text-gray); }
-        .action-btn { background: rgba(255, 215, 0, 0.1); color: var(--page-color); border: 1px solid var(--page-color); text-decoration: none; padding: 8px 20px; border-radius: 50px; display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; transition: 0.3s; cursor: pointer; }
-        .action-btn:hover { background: var(--page-color); color: #000; box-shadow: 0 0 20px var(--page-color); transform: translateY(-2px); }
-        .cart-count { background: #ff4d4d; color: white; padding: 2px 6px; border-radius: 50%; font-size: 10px; position: absolute; top: -5px; left: -5px; }
+        .search-input {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 30px 8px 15px; border-radius: 30px; color: white;
+            width: 170px; outline: none; font-family: var(--font-main); transition: 0.4s; font-size: 13px;
+        }
+        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 15px var(--primary-glow); width: 220px; }
+        .search-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #777; font-size: 12px; }
+
+        .action-btn {
+            background: transparent; color: var(--text-main); border: 1px solid rgba(255,255,255,0.2);
+            padding: 6px 15px; border-radius: 30px; font-weight: 700; font-size: 13px;
+            text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 6px; position: relative;
+            cursor: pointer; white-space: nowrap;
+        }
+        .action-btn:hover {
+            border-color: var(--primary); background: var(--primary-glow); color: #fff;
+            box-shadow: 0 0 20px var(--primary-glow); transform: translateY(-2px);
+        }
+        .cart-count {
+            background: var(--primary); color: #000; padding: 2px 5px; border-radius: 50%;
+            font-size: 10px; font-weight: bold; position: absolute; top: -8px; left: -5px;
+        }
 
         /* Hero */
         .hero-banner { background: linear-gradient(to bottom, #000000, rgba(255, 215, 0, 0.05)); border-bottom: 1px solid rgba(255, 215, 0, 0.3); padding: 80px 20px; text-align: center; margin-bottom: 50px; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
@@ -247,16 +285,18 @@
             <a href="index.html" class="logo">DS STORE <i class="fas fa-gamepad logo-icon"></i></a>
         </div>
         <div class="header-center"><nav>
-            <a href="index.html" class="nav-link">الرئيسية</a>
+            <a href="index.html" class="nav-link ">الرئيسية</a>
             <a href="games.html" class="nav-link active">ألعاب PC</a>
-            <a href="subscriptions.html" class="nav-link">اشتراكات</a>
-            <a href="charging.html" class="nav-link">شحن</a>
-            <a href="discord.html" class="nav-link">Nitro</a>
+            <a href="subscriptions.html" class="nav-link ">اشتراكات</a>
+            <a href="charging.html" class="nav-link ">شحن</a>
+            <a href="discord.html" class="nav-link ">Nitro</a>
+            <a href="contact.html" class="nav-link ">تواصل معنا</a>
         </nav></div>
         <div class="header-left">
             <div class="search-container"><i class="fas fa-search search-icon"></i><input type="text" class="search-input" placeholder="ابحث عن الالعاب..."></div>
             <a href="#" class="action-btn" onclick="event.preventDefault(); toggleCart(true);"><span class="cart-count">0</span>السله <i class="fas fa-shopping-cart"></i></a>
             <a href="#" class="action-btn" onclick="event.preventDefault(); toggleOrders(true);">طلباتي <i class="fas fa-box-open"></i></a>
+            <button id="loginBtn" class="action-btn" type="button">تسجيل دخول</button>
         </div>
     </header>
 
@@ -271,52 +311,52 @@
         </div>
 
         <div class="products-grid">
-            <div class="product-card"><img src="games/GTA VE.jpg" alt="GTA V" class="product-image"><div class="product-info"><h3>GTA V ENHANCED</h3><span class="price">540 EGP</span><button class="buy-btn" onclick="openModal('GTA V ENHANCED', '540 EGP', 'games/GTA VE.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/FC25.jpg" alt="FC 24" class="product-image"><div class="product-info"><h3>FC 25</h3><span class="price">200 EGP</span><button class="buy-btn" onclick="openModal('FC 25', '200 EGP', 'games/FC25.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/RDR 2.jpg" alt="Red Dead 2" class="product-image"><div class="product-info"><h3>Red Dead Redemption 2</h3><span class="price">520 EGP</span><button class="buy-btn" onclick="openModal('RDR 2', '520 EGP', 'games/RDR 2.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/watch-dogs-2.jpg" alt="Watch Dogs 2" class="product-image"><div class="product-info"><h3>Watch Dogs 2</h3><span class="price">160 EGP</span><button class="buy-btn" onclick="openModal('Watch Dogs 2', '160 EGP', 'games/watch-dogs-2.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/ARC Raiders.jpg" alt="ARC Raiders" class="product-image"><div class="product-info"><h3>ARC Raiders</h3><span class="price">1100 EGP</span><button class="buy-btn" onclick="openModal('ARC Raiders', '1100 EGP', 'games/ARC Raiders.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Look Outside.jpg" alt="Look Outside" class="product-image"><div class="product-info"><h3>Look Outside</h3><span class="price">260 EGP</span><button class="buy-btn" onclick="openModal('Look Outside', '260 EGP', 'games/Look Outside.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Sons Of The Forest.jpg" alt="Sons Of The Forest" class="product-image"><div class="product-info"><h3>Sons Of The Forest</h3><span class="price">299 EGP</span><button class="buy-btn" onclick="openModal('Sons Of The Forest', '299 EGP', 'games/Sons Of The Forest.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Crusader Kings III.jpg" alt="Crusader Kings III" class="product-image"><div class="product-info"><h3>Crusader Kings III</h3><span class="price">499 EGP</span><button class="buy-btn" onclick="openModal('Crusader Kings III', '499 EGP', 'games/Crusader Kings III.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Little Nightmares II.jpg" alt="Little Nightmares II" class="product-image"><div class="product-info"><h3>Little Nightmares II</h3><span class="price">290 EGP</span><button class="buy-btn" onclick="openModal('Little Nightmares II', '290 EGP', 'games/Little Nightmares II.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Left 4 Dead 2.jpg" alt="Left 4 Dead 2" class="product-image"><div class="product-info"><h3>Left 4 Dead 2</h3><span class="price">99 EGP</span><button class="buy-btn" onclick="openModal('Left 4 Dead 2', '99 EGP', 'games/Left 4 Dead 2.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/ARK Survival Ascended.jpg" alt="ARK Survival Ascended" class="product-image"><div class="product-info"><h3>ARK Survival Ascended</h3><span class="price">435 EGP</span><button class="buy-btn" onclick="openModal('ARK Survival Ascended', '435 EGP', 'games/ARK Survival Ascended.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Squad Game.jpg" alt="Squad Game" class="product-image"><div class="product-info"><h3>Squad Game</h3><span class="price">380 EGP</span><button class="buy-btn" onclick="openModal('Squad Game', '380 EGP', 'games/Squad Game.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/RUST.jpg" alt="RUST" class="product-image"><div class="product-info"><h3>RUST</h3><span class="price">420 EGP</span><button class="buy-btn" onclick="openModal('RUST', '420 EGP', 'games/RUST.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Minecraft Java and Bedrock.jpg" alt="Minecraft Java and Bedrock" class="product-image"><div class="product-info"><h3>Minecraft Java and Bedrock</h3><span class="price">490 EGP</span><button class="buy-btn" onclick="openModal('Minecraft Java and Bedrock', '490 EGP', 'games/Minecraft Java and Bedrock.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Tom Clancy's Ghost Recon Wildlands.jpg" alt="Tom Clancy's Ghost Recon Wildlands" class="product-image"><div class="product-info"><h3>Tom Clancy's Ghost Recon Wildlands</h3><span class="price">210 EGP</span><button class="buy-btn" onclick="openModal('Tom Clancy s Ghost Recon Wildlands', '210 EGP', 'games/Tom Clancy s Ghost Recon Wildlands.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Need for Speed™ Unbound.jpg" alt="Need for Speed™ Unbound" class="product-image"><div class="product-info"><h3>Need for Speed™ Unbound</h3><span class="price">279 EGP</span><button class="buy-btn" onclick="openModal('Need for Speed™ Unbound', '279 EGP', 'games/Need for Speed™ Unbound.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/A Way Out.jpg" alt="A Way Out" class="product-image"><div class="product-info"><h3>A Way Out</h3><span class="price">319 EGP</span><button class="buy-btn" onclick="openModal('A Way Out', '319 EGP', 'games/A Way Out.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Dying Light 2.jpg" alt="Dying Light 2" class="product-image"><div class="product-info"><h3>Dying Light 2</h3><span class="price">480 EGP</span><button class="buy-btn" onclick="openModal('Dying Light 2', '480 EGP', 'games/Dying Light 2.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/7Days to Die.jpg" alt="7Days to Die" class="product-image"><div class="product-info"><h3>7Days to Die</h3><span class="price">149 EGP</span><button class="buy-btn" onclick="openModal('7Days to Die', '149 EGP', 'games/7Days to Die.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/CarX Drift Racing Online.png" alt="CarX Drift Racing Online" class="product-image"><div class="product-info"><h3>CarX Drift Racing Online</h3><span class="price">250 EGP</span><button class="buy-btn" onclick="openModal('CarX Drift Racing Online', '250 EGP', 'games/CarX Drift Racing Online.png')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Tom Clancys Rainbow Six Siege.png" alt="Tom Clancys Rainbow Six Siege" class="product-image"><div class="product-info"><h3>Tom Clancys Rainbow Six Siege</h3><span class="price">249 EGP</span><button class="buy-btn" onclick="openModal('Tom Clancys Rainbow Six Siege', '249 EGP', 'games/Tom Clancys Rainbow Six Siege.png')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Cyberpunk 2077.jpg" alt="Cyberpunk 2077" class="product-image"><div class="product-info"><h3>Cyberpunk 2077</h3><span class="price">349 EGP</span><button class="buy-btn" onclick="openModal('Cyberpunk 2077', '349 EGP', 'games/Cyberpunk 2077.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Sleeping Dogs Definitive Edition.jpg" alt="Sleeping Dogs Definitive Edition" class="product-image"><div class="product-info"><h3>Sleeping Dogs: Definitive Edition</h3><span class="price">259 EGP</span><button class="buy-btn" onclick="openModal('Sleeping Dogs: Definitive Edition', '259 EGP', 'games/Sleeping Dogs Definitive Edition.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/The Forest.jpg" alt="The Forest" class="product-image"><div class="product-info"><h3>The Forest</h3><span class="price">99 EGP</span><button class="buy-btn" onclick="openModal('The Forest', '99 EGP', 'games/The Forest.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Battlefield 6.jpg" alt="Battlefield 6" class="product-image"><div class="product-info"><h3>Battlefield 6</h3><span class="price">1250 EGP</span><button class="buy-btn" onclick="openModal('Battlefield 6', '1250 EGP', 'games/Battlefield 6.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Sea of Thieves 2025.png" alt="Sea of Thieves 2025" class="product-image"><div class="product-info"><h3>Sea of Thieves 2025</h3><span class="price">645 EGP</span><button class="buy-btn" onclick="openModal('Sea of Thieves 2025', '645 EGP', 'games/Sea of Thieves 2025.png')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Battlefield 1.jpg" alt="Battlefield 1" class="product-image"><div class="product-info"><h3>Battlefield 1</h3><span class="price">110 EGP</span><button class="buy-btn" onclick="openModal('Battlefield 1', '110 EGP', 'games/Battlefield 1.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Arma 3.jpg" alt="Arma 3" class="product-image"><div class="product-info"><h3>Arma 3</h3><span class="price">149 EGP</span><button class="buy-btn" onclick="openModal('Arma 3', '149 EGP', 'games/Arma 3.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Garry's Mod.jpg" alt="Garry's Mod" class="product-image"><div class="product-info"><h3>Garry's Mod</h3><span class="price">180 EGP</span><button class="buy-btn" onclick="openModal('Garrys Mod', '180 EGP', 'games/Garrys Mod.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Assassin's Creed® Origins.jpg" alt="Assassin's Creed® Origins" class="product-image"><div class="product-info"><h3>Assassin's Creed® Origins</h3><span class="price">110 EGP</span><button class="buy-btn" onclick="openModal('Assassins Creed® Origins', '110 EGP', 'games/Assassins Creed® Origins.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Wallpaper Engine.jpg" alt="Wallpaper Engine" class="product-image"><div class="product-info"><h3>Wallpaper Engine</h3><span class="price">110 EGP</span><button class="buy-btn" onclick="openModal('Wallpaper Engine', '110 EGP', 'games/Wallpaper Engine.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/FC 26.jpg" alt="FC 26" class="product-image"><div class="product-info"><h3>FC 26</h3><span class="price">640 EGP</span><button class="buy-btn" onclick="openModal('FC 26', '640 EGP', 'games/FC 26.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Euro Truck Simulator 2.jpg" alt="Euro Truck Simulator 2" class="product-image"><div class="product-info"><h3>Euro Truck Simulator 2</h3><span class="price">159 EGP</span><button class="buy-btn" onclick="openModal('Euro Truck Simulator 2', '159 EGP', 'games/Euro Truck Simulator 2.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/PEAK.jpg" alt="PEAK" class="product-image"><div class="product-info"><h3>PEAK</h3><span class="price">175 EGP</span><button class="buy-btn" onclick="openModal('PEAK', '175 EGP', 'games/PEAK.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Assetto Corsa.jpg" alt="Assetto Corsa" class="product-image"><div class="product-info"><h3>Assetto Corsa</h3><span class="price">175 EGP</span><button class="buy-btn" onclick="openModal('Assetto Corsa', '175 EGP', 'games/Assetto Corsa.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Battlefield™ V.jpg" alt="7Battlefield™ V" class="product-image"><div class="product-info"><h3>Battlefield™ V</h3><span class="price">110 EGP</span><button class="buy-btn" onclick="openModal('Battlefield™ V', '110 EGP', 'games/Battlefield™ V.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/ARK Survival Evolved.png" alt="ARK Survival: Evolved" class="product-image"><div class="product-info"><h3>ARK Survival: Evolved</h3><span class="price">99 EGP</span><button class="buy-btn" onclick="openModal('ARK Survival: Evolved', '99 EGP', 'games/7ARK Survival Evolved.png')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Phasmophobia.jpg" alt="Phasmophobia" class="product-image"><div class="product-info"><h3>Phasmophobia</h3><span class="price">279 EGP</span><button class="buy-btn" onclick="openModal('Phasmophobia', '279 EGP', 'games/Phasmophobia.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Need For Speed Heat.jpg" alt="Need For Speed Heat" class="product-image"><div class="product-info"><h3>Need For Speed Heat</h3><span class="price">120 EGP</span><button class="buy-btn" onclick="openModal('Need For Speed Heat', '120 EGP', 'games/Need For Speed Heat.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/DEVOUR.jpg" alt="DEVOUR" class="product-image"><div class="product-info"><h3>DEVOUR</h3><span class="price">349 EGP</span><button class="buy-btn" onclick="openModal('DEVOUR', '349 EGP', 'games/DEVOUR.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Ready or Not Community closure.png" alt="Ready or Not Community closure" class="product-image"><div class="product-info"><h3>Ready or Not Community closure</h3><span class="price">249 EGP</span><button class="buy-btn" onclick="openModal('Ready or Not Community closure', '249 EGP', 'games/Ready or Not Community closure.png')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Bodycam.jpg" alt="Bodycam" class="product-image"><div class="product-info"><h3>Bodycam</h3><span class="price">499 EGP</span><button class="buy-btn" onclick="openModal('Bodycam', '499 EGP', 'games/Bodycam.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Dead by Daylight.jpg" alt="Dead by Daylight" class="product-image"><div class="product-info"><h3>Dead by Daylight</h3><span class="price">349 EGP</span><button class="buy-btn" onclick="openModal('Dead by Daylight', '349 EGP', 'games/Dead by Daylight.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/For Honor.jpg" alt="For Honor" class="product-image"><div class="product-info"><h3>For Honor</h3><span class="price">199 EGP</span><button class="buy-btn" onclick="openModal('For Honor', '199 EGP', 'games/For Honor.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Forza Horizon 5.jpg" alt="Forza Horizon 5" class="product-image"><div class="product-info"><h3>Forza Horizon 5</h3><span class="price">840 EGP</span><button class="buy-btn" onclick="openModal('Forza Horizon 5', '840 EGP', 'games/Forza Horizon 5.jpg')">شراء</button></div></div>
-            <div class="product-card"><img src="games/Battlefield™ 2042.jpg" alt="Battlefield™ 2042" class="product-image"><div class="product-info"><h3>Battlefield™ 2042</h3><span class="price">190 EGP</span><button class="buy-btn" onclick="openModal('Battlefield™ 2042', '190 EGP', 'games/Battlefield™ 2042.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/GTA VE.jpg" alt="GTA V" class="product-image"><div class="product-info"><h3>GTA V ENHANCED</h3><span class="price">700 EGP</span><button class="buy-btn" onclick="openModal('GTA V ENHANCED', '700 EGP', 'games/GTA VE.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/FC25.jpg" alt="FC 24" class="product-image"><div class="product-info"><h3>FC 25</h3><span class="price">350 EGP</span><button class="buy-btn" onclick="openModal('FC 25', '350 EGP', 'games/FC25.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/RDR 2.jpg" alt="Red Dead 2" class="product-image"><div class="product-info"><h3>Red Dead Redemption 2</h3><span class="price">650 EGP</span><button class="buy-btn" onclick="openModal('RDR 2', '650 EGP', 'games/RDR 2.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/watch-dogs-2.jpg" alt="Watch Dogs 2" class="product-image"><div class="product-info"><h3>Watch Dogs 2</h3><span class="price">250 EGP</span><button class="buy-btn" onclick="openModal('Watch Dogs 2', '250 EGP', 'games/watch-dogs-2.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/ARC Raiders.jpg" alt="ARC Raiders" class="product-image"><div class="product-info"><h3>ARC Raiders</h3><span class="price">1350 EGP</span><button class="buy-btn" onclick="openModal('ARC Raiders', '1350 EGP', 'games/ARC Raiders.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Look Outside.jpg" alt="Look Outside" class="product-image"><div class="product-info"><h3>Look Outside</h3><span class="price">330 EGP</span><button class="buy-btn" onclick="openModal('Look Outside', '330 EGP', 'games/Look Outside.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Sons Of The Forest.jpg" alt="Sons Of The Forest" class="product-image"><div class="product-info"><h3>Sons Of The Forest</h3><span class="price">399 EGP</span><button class="buy-btn" onclick="openModal('Sons Of The Forest', '399 EGP', 'games/Sons Of The Forest.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Crusader Kings III.jpg" alt="Crusader Kings III" class="product-image"><div class="product-info"><h3>Crusader Kings III</h3><span class="price">549 EGP</span><button class="buy-btn" onclick="openModal('Crusader Kings III', '549 EGP', 'games/Crusader Kings III.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Little Nightmares II.jpg" alt="Little Nightmares II" class="product-image"><div class="product-info"><h3>Little Nightmares II</h3><span class="price">349 EGP</span><button class="buy-btn" onclick="openModal('Little Nightmares II', '349 EGP', 'games/Little Nightmares II.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Left 4 Dead 2.jpg" alt="Left 4 Dead 2" class="product-image"><div class="product-info"><h3>Left 4 Dead 2</h3><span class="price">120 EGP</span><button class="buy-btn" onclick="openModal('Left 4 Dead 2', '120 EGP', 'games/Left 4 Dead 2.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/ARK Survival Ascended.jpg" alt="ARK Survival Ascended" class="product-image"><div class="product-info"><h3>ARK Survival Ascended</h3><span class="price">520 EGP</span><button class="buy-btn" onclick="openModal('ARK Survival Ascended', '520 EGP', 'games/ARK Survival Ascended.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Squad Game.jpg" alt="Squad Game" class="product-image"><div class="product-info"><h3>Squad Game</h3><span class="price">480 EGP</span><button class="buy-btn" onclick="openModal('Squad Game', '480 EGP', 'games/Squad Game.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/RUST.jpg" alt="RUST" class="product-image"><div class="product-info"><h3>RUST</h3><span class="price">500 EGP</span><button class="buy-btn" onclick="openModal('RUST', '500 EGP', 'games/RUST.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Minecraft Java and Bedrock.jpg" alt="Minecraft Java and Bedrock" class="product-image"><div class="product-info"><h3>Minecraft Java and Bedrock</h3><span class="price">590 EGP</span><button class="buy-btn" onclick="openModal('Minecraft Java and Bedrock', '590 EGP', 'games/Minecraft Java and Bedrock.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Tom Clancy's Ghost Recon Wildlands.jpg" alt="Tom Clancy's Ghost Recon Wildlands" class="product-image"><div class="product-info"><h3>Tom Clancy's Ghost Recon Wildlands</h3><span class="price">280 EGP</span><button class="buy-btn" onclick="openModal('Tom Clancy s Ghost Recon Wildlands', '280 EGP', 'games/Tom Clancy s Ghost Recon Wildlands.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Need for Speed™ Unbound.jpg" alt="Need for Speed™ Unbound" class="product-image"><div class="product-info"><h3>Need for Speed™ Unbound</h3><span class="price">379 EGP</span><button class="buy-btn" onclick="openModal('Need for Speed™ Unbound', '379 EGP', 'games/Need for Speed™ Unbound.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/A Way Out.jpg" alt="A Way Out" class="product-image"><div class="product-info"><h3>A Way Out</h3><span class="price">400 EGP</span><button class="buy-btn" onclick="openModal('A Way Out', '400 EGP', 'games/A Way Out.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Dying Light 2.jpg" alt="Dying Light 2" class="product-image"><div class="product-info"><h3>Dying Light 2</h3><span class="price">550 EGP</span><button class="buy-btn" onclick="openModal('Dying Light 2', '550 EGP', 'games/Dying Light 2.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/7Days to Die.jpg" alt="7Days to Die" class="product-image"><div class="product-info"><h3>7Days to Die</h3><span class="price">195 EGP</span><button class="buy-btn" onclick="openModal('7Days to Die', '195 EGP', 'games/7Days to Die.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/CarX Drift Racing Online.png" alt="CarX Drift Racing Online" class="product-image"><div class="product-info"><h3>CarX Drift Racing Online</h3><span class="price">320 EGP</span><button class="buy-btn" onclick="openModal('CarX Drift Racing Online', '320 EGP', 'games/CarX Drift Racing Online.png')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Tom Clancys Rainbow Six Siege.png" alt="Tom Clancys Rainbow Six Siege" class="product-image"><div class="product-info"><h3>Tom Clancys Rainbow Six Siege</h3><span class="price">349 EGP</span><button class="buy-btn" onclick="openModal('Tom Clancys Rainbow Six Siege', '349 EGP', 'games/Tom Clancys Rainbow Six Siege.png')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Cyberpunk 2077.jpg" alt="Cyberpunk 2077" class="product-image"><div class="product-info"><h3>Cyberpunk 2077</h3><span class="price">449 EGP</span><button class="buy-btn" onclick="openModal('Cyberpunk 2077', '449 EGP', 'games/Cyberpunk 2077.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Sleeping Dogs Definitive Edition.jpg" alt="Sleeping Dogs Definitive Edition" class="product-image"><div class="product-info"><h3>Sleeping Dogs: Definitive Edition</h3><span class="price">320 EGP</span><button class="buy-btn" onclick="openModal('Sleeping Dogs: Definitive Edition', '320 EGP', 'games/Sleeping Dogs Definitive Edition.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/The Forest.jpg" alt="The Forest" class="product-image"><div class="product-info"><h3>The Forest</h3><span class="price">149 EGP</span><button class="buy-btn" onclick="openModal('The Forest', '149 EGP', 'games/The Forest.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Battlefield 6.jpg" alt="Battlefield 6" class="product-image"><div class="product-info"><h3>Battlefield 6</h3><span class="price">1499 EGP</span><button class="buy-btn" onclick="openModal('Battlefield 6', '1499 EGP', 'games/Battlefield 6.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Sea of Thieves 2025.png" alt="Sea of Thieves 2025" class="product-image"><div class="product-info"><h3>Sea of Thieves 2025</h3><span class="price">700 EGP</span><button class="buy-btn" onclick="openModal('Sea of Thieves 2025', '700 EGP', 'games/Sea of Thieves 2025.png')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Battlefield 1.jpg" alt="Battlefield 1" class="product-image"><div class="product-info"><h3>Battlefield 1</h3><span class="price">159 EGP</span><button class="buy-btn" onclick="openModal('Battlefield 1', '159 EGP', 'games/Battlefield 1.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Arma 3.jpg" alt="Arma 3" class="product-image"><div class="product-info"><h3>Arma 3</h3><span class="price">199 EGP</span><button class="buy-btn" onclick="openModal('Arma 3', '199 EGP', 'games/Arma 3.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Garry's Mod.jpg" alt="Garry's Mod" class="product-image"><div class="product-info"><h3>Garry's Mod</h3><span class="price">229 EGP</span><button class="buy-btn" onclick="openModal('Garrys Mod', '299 EGP', 'games/Garrys Mod.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Assassin's Creed® Origins.jpg" alt="Assassin's Creed® Origins" class="product-image"><div class="product-info"><h3>Assassin's Creed® Origins</h3><span class="price">159 EGP</span><button class="buy-btn" onclick="openModal('Assassins Creed® Origins', '159 EGP', 'games/Assassins Creed® Origins.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Wallpaper Engine.jpg" alt="Wallpaper Engine" class="product-image"><div class="product-info"><h3>Wallpaper Engine</h3><span class="price">159 EGP</span><button class="buy-btn" onclick="openModal('Wallpaper Engine', '159 EGP', 'games/Wallpaper Engine.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/FC 26.jpg" alt="FC 26" class="product-image"><div class="product-info"><h3>FC 26</h3><span class="price">850 EGP</span><button class="buy-btn" onclick="openModal('FC 26', '850 EGP', 'games/FC 26.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Euro Truck Simulator 2.jpg" alt="Euro Truck Simulator 2" class="product-image"><div class="product-info"><h3>Euro Truck Simulator 2</h3><span class="price">199 EGP</span><button class="buy-btn" onclick="openModal('Euro Truck Simulator 2', '199 EGP', 'games/Euro Truck Simulator 2.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/PEAK.jpg" alt="PEAK" class="product-image"><div class="product-info"><h3>PEAK</h3><span class="price">199 EGP</span><button class="buy-btn" onclick="openModal('PEAK', '199 EGP', 'games/PEAK.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Assetto Corsa.jpg" alt="Assetto Corsa" class="product-image"><div class="product-info"><h3>Assetto Corsa</h3><span class="price">249 EGP</span><button class="buy-btn" onclick="openModal('Assetto Corsa', '249 EGP', 'games/Assetto Corsa.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Battlefield™ V.jpg" alt="7Battlefield™ V" class="product-image"><div class="product-info"><h3>Battlefield™ V</h3><span class="price">169 EGP</span><button class="buy-btn" onclick="openModal('Battlefield™ V', '169 EGP', 'games/Battlefield™ V.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/ARK Survival Evolved.png" alt="ARK Survival: Evolved" class="product-image"><div class="product-info"><h3>ARK Survival: Evolved</h3><span class="price">149 EGP</span><button class="buy-btn" onclick="openModal('ARK Survival: Evolved', '149 EGP', 'games/7ARK Survival Evolved.png')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Phasmophobia.jpg" alt="Phasmophobia" class="product-image"><div class="product-info"><h3>Phasmophobia</h3><span class="price">319 EGP</span><button class="buy-btn" onclick="openModal('Phasmophobia', '319 EGP', 'games/Phasmophobia.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Need For Speed Heat.jpg" alt="Need For Speed Heat" class="product-image"><div class="product-info"><h3>Need For Speed Heat</h3><span class="price">199 EGP</span><button class="buy-btn" onclick="openModal('Need For Speed Heat', '199 EGP', 'games/Need For Speed Heat.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/DEVOUR.jpg" alt="DEVOUR" class="product-image"><div class="product-info"><h3>DEVOUR</h3><span class="price">399 EGP</span><button class="buy-btn" onclick="openModal('DEVOUR', '399 EGP', 'games/DEVOUR.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Ready or Not Community closure.png" alt="Ready or Not Community closure" class="product-image"><div class="product-info"><h3>Ready or Not Community closure</h3><span class="price">399 EGP</span><button class="buy-btn" onclick="openModal('Ready or Not Community closure', '399 EGP', 'games/Ready or Not Community closure.png')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Bodycam.jpg" alt="Bodycam" class="product-image"><div class="product-info"><h3>Bodycam</h3><span class="price">549 EGP</span><button class="buy-btn" onclick="openModal('Bodycam', '549 EGP', 'games/Bodycam.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Dead by Daylight.jpg" alt="Dead by Daylight" class="product-image"><div class="product-info"><h3>Dead by Daylight</h3><span class="price">449 EGP</span><button class="buy-btn" onclick="openModal('Dead by Daylight', '449 EGP', 'games/Dead by Daylight.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/For Honor.jpg" alt="For Honor" class="product-image"><div class="product-info"><h3>For Honor</h3><span class="price">249 EGP</span><button class="buy-btn" onclick="openModal('For Honor', '249 EGP', 'games/For Honor.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Forza Horizon 5.jpg" alt="Forza Horizon 5" class="product-image"><div class="product-info"><h3>Forza Horizon 5</h3><span class="price">949 EGP</span><button class="buy-btn" onclick="openModal('Forza Horizon 5', '949 EGP', 'games/Forza Horizon 5.jpg')">شراء</button></div></div>
+            <div class="product-card"><img src="games/Battlefield™ 2042.jpg" alt="Battlefield™ 2042" class="product-image"><div class="product-info"><h3>Battlefield™ 2042</h3><span class="price">249 EGP</span><button class="buy-btn" onclick="openModal('Battlefield™ 2042', '249 EGP', 'games/Battlefield™ 2042.jpg')">شراء</button></div></div>
         </div>
     </div>
 
@@ -376,20 +416,19 @@
             <a href="subscriptions.html" class="sidebar-link"><i class="fas fa-crown"></i> اشتراكات</a>
             <a href="charging.html" class="sidebar-link"><i class="fas fa-bolt"></i> شحن</a>
             <a href="discord.html" class="sidebar-link"><i class="fab fa-discord"></i> Nitro</a>
+            <a href="contact.html" class="sidebar-link"><i class="fas fa-headset"></i> تواصل معنا</a>
         </div>
     </div>
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
     <script>
         function openModal(t,p,i){
-            document.getElementById('buyModal').style.display='flex';
-            document.getElementById('modal-title').innerText=t;
-            document.getElementById('modal-price').innerText=p;
-            document.getElementById('hidden-product').value=t;
-            document.getElementById('hidden-price').value=p;
-            document.getElementById('modal-img').src=i||'https://via.placeholder.com/80';
-            document.getElementById('status').innerText="";
-            selectPayment(document.querySelector('.payment-option'), 'Vodafone Cash');
+            goToCheckout(t,p,i);
+        }
+        function goToCheckout(title, price, img){
+            const item = { title: title, price: price, img: (img||''), from: (location.pathname||''), ts: Date.now() };
+            localStorage.setItem('ds_checkout_item', JSON.stringify(item));
+            window.location.href = 'checkout.html';
         }
         function closeModal(){document.getElementById('buyModal').style.display='none';}
         
@@ -450,5 +489,42 @@
         });
     </script>
     <script type="text/javascript">var Tawk_API=Tawk_API||{},Tawk_LoadStart=new Date();(function(){var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];s1.async=true;s1.src='https://embed.tawk.to/694811440b00e71980bdd281/1jd0o6tfe';s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);})();</script>
+
+  <script type="module" src="auth-modal.js"></script>
+
+<script>
+  // Auto-highlight the current page link in the header + sidebar
+  (function(){
+    function normalizeHref(href){
+      if(!href) return "";
+      const clean = href.split('#')[0].split('?')[0];
+      return clean.split('/').pop();
+    }
+
+    function currentPage(){
+      let p = (window.location.pathname || "").split('/').pop();
+      p = p.split('#')[0].split('?')[0];
+      if(!p) p = "index.html";
+      return p;
+    }
+
+    function markActive(selector){
+      const cur = currentPage();
+      document.querySelectorAll(selector).forEach(a => {
+        const target = normalizeHref(a.getAttribute('href'));
+        if(!target) return;
+        if(target === cur || (cur === "index.html" && (target === "" || target === "/"))){
+          a.classList.add('active');
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      markActive('a.nav-link');
+      markActive('a.sidebar-link');
+    });
+  })();
+</script>
+
 </body>
 </html>
