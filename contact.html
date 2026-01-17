@@ -8,276 +8,73 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        :root {--page-color: #ffd700;
-            --bg-body: linear-gradient(135deg, #050505 0%, #101015 100%);
-            --text-white: #ffffff;
-            --text-gray: #b0b0c0; --primary: var(--page-color); --primary-glow: rgba(255,255,255,0.08); --text-muted: #b0b0c0; --text-main: #ffffff; --font-main: 'Cairo', sans-serif; }
+        :root {--page-color: #ffd700; --bg-body: linear-gradient(135deg, #050505 0%, #101015 100%); --text-white:#fff; --text-gray:#b0b0c0; --primary:var(--page-color); --primary-glow:rgba(255,255,255,0.08); --text-muted:#b0b0c0; --text-main:#fff; --font-main:'Cairo',sans-serif;}
+        body{font-family:'Cairo',sans-serif;margin:0;background:var(--bg-body);color:var(--text-white);min-height:100vh}
 
-        body {
-            font-family: 'Cairo', sans-serif;
-            margin: 0;
-            background: var(--bg-body);
-            color: var(--text-white);
-            min-height: 100vh;
-        }
+        /* ===== Header (موحد مع باقي الصفحات) ===== */
+        .custom-header{background:rgba(5,5,5,.90);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:10px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,215,0,.15);position:sticky;top:0;z-index:1000;gap:10px;box-shadow:0 4px 30px rgba(0,0,0,.5)}
+        .logo{font-size:22px;font-weight:900;color:#fff;text-decoration:none;display:flex;align-items:center;gap:8px}
+        .logo i{color:var(--page-color);filter:drop-shadow(0 0 8px var(--page-color))}
+        .header-center{flex-grow:1;display:flex;justify-content:center}
+        .nav-link{color:var(--text-muted);text-decoration:none;font-weight:700;margin:0 10px;position:relative;transition:.3s;white-space:nowrap}
+        .nav-link:hover,.nav-link.active{color:#fff;text-shadow:0 0 10px var(--page-color)}
+        .nav-link.active:after{content:"";position:absolute;left:0;bottom:-5px;width:100%;height:2px;background:var(--page-color);box-shadow:0 0 10px var(--page-color)}
+        .header-left{display:flex;align-items:center;gap:8px}
+        .search-container{position:relative}
+        .search-input{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:8px 30px 8px 15px;border-radius:30px;color:#fff;width:170px;transition:.4s}
+        .search-input:focus{border-color:var(--page-color);width:220px;box-shadow:0 0 15px rgba(255,255,255,.08)}
+        .search-icon{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:#777;font-size:12px}
+        .action-btn{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2);padding:6px 15px;border-radius:30px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;transition:.3s}
+        .action-btn:hover{border-color:var(--page-color);background:rgba(255,255,255,.08);box-shadow:0 0 20px rgba(255,255,255,.08)}
+        .cart-count{background:var(--page-color);color:#000;padding:2px 5px;border-radius:50%;font-size:10px;position:absolute;top:-8px;left:-5px}
 
-        /* --- الهيدر --- */
-        .custom-header {
-            background: rgba(10, 10, 15, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo { font-size: 26px; font-weight: 900; color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; }
-        .logo i { color: var(--page-color); }
-        .nav-link { color: var(--text-gray); text-decoration: none; font-weight: 700; margin: 0 15px; transition: 0.3s; }
-        .nav-link.active { color: white; text-shadow: 0 0 10px var(--page-color); }
-
-        /* --- حاوية البطاقات --- */
-        .main-contact-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 60px 20px;
-        }
-
-        .cards-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 50px; /* المسافة بين البطاقتين */
-            margin-top: 40px;
-        }
-
-        .contact-title {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--page-color);
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
-            margin-bottom: 10px;
-        }
-
-        /* --- ستايل البطاقة (الكود الخاص بك) --- */
-        .container {
-            height: 320px;
-            width: 260px;
-            perspective: 800px;
-        }
-
-        .card {
-            width: 100%;
-            height: 100%;
-            background: black;
-            border-radius: 2rem;
-            position: relative;
-            transition: transform 1500ms;
-            transform-style: preserve-3d;
-        }
-
-        .container:hover > .card {
-            cursor: pointer;
-            transform: rotateX(180deg) rotateZ(-180deg);
-        }
-
-        .front, .back {
-            height: 100%;
-            width: 100%;
-            border-radius: 2rem;
-            box-shadow: 0px 0px 15px 5px rgba(255, 215, 0, 0.2);
-            position: absolute;
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            padding: 20px;
-            box-sizing: border-box;
-            border: 1px solid rgba(255, 215, 0, 0.1);
-        }
-
-        .back {
-            background-color: #050505;
-            transform: rotateX(180deg) rotateZ(-180deg);
-        }
-
-        .card-top {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 35px;
-            position: absolute;
-            width: 60%;
-            background-color: #000;
-            border: 1px solid var(--page-color);
-            top: 0;
-            border-top: none;
-            border-radius: 0 0 1rem 1rem;
-        }
-
-        .heading { font-size: 20px; font-weight: bold; color: var(--page-color); }
-        .follow { font-size: 14px; color: #ccc; text-align: center; }
-
-        .icons { display: flex; gap: 15px; margin-top: 10px; }
-        .icons a { color: white; transition: 0.3s; }
-        .icons a:hover { color: var(--page-color); transform: translateY(-5px); }
-
-        /* زر الحساب في الهيدر */
-        .action-btn{background:var(--page-color);color:#fff;border:0;padding:10px 14px;border-radius:12px;font-family:'Cairo';font-weight:800;cursor:pointer}
-        .action-btn:hover{filter:brightness(1.08)}
-
-        @media (max-width: 600px) {
-            .cards-wrapper { gap: 30px; }
-        }
+        /* ===== محتوى الصفحة ===== */
+        .main-contact-container{display:flex;flex-direction:column;align-items:center;padding:60px 20px}
+        .cards-wrapper{display:flex;flex-wrap:wrap;justify-content:center;gap:50px;margin-top:40px}
+        .contact-title{font-size:2.5rem;font-weight:900;color:var(--page-color);text-shadow:0 0 15px rgba(255,215,0,.3);margin-bottom:10px}
+        .container{height:320px;width:260px;perspective:800px}
+        .card{width:100%;height:100%;background:black;border-radius:2rem;position:relative;transition:transform 1500ms;transform-style:preserve-3d}
+        .container:hover>.card{cursor:pointer;transform:rotateX(180deg) rotateZ(-180deg)}
+        .front,.back{height:100%;width:100%;border-radius:2rem;box-shadow:0 0 15px 5px rgba(255,215,0,.2);position:absolute;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px;padding:20px;box-sizing:border-box;border:1px solid rgba(255,215,0,.1)}
+        .back{background:#050505;transform:rotateX(180deg) rotateZ(-180deg)}
+        .card-top{display:flex;align-items:center;justify-content:center;height:35px;position:absolute;width:60%;background:#000;border:1px solid var(--page-color);top:0;border-top:none;border-radius:0 0 1rem 1rem}
+        .heading{font-size:20px;font-weight:bold;color:var(--page-color)}
+        .follow{font-size:14px;color:#ccc;text-align:center}
+        .icons{display:flex;gap:15px;margin-top:10px}
+        .icons a{color:#fff;transition:.3s}
+        .icons a:hover{color:var(--page-color);transform:translateY(-5px)}
     </style>
 </head>
 <body>
 
-    <header class="custom-header">
-        <div class="header-right">
-            <div class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
-            <a href="index.html" class="logo">DS STORE <i class="fas fa-gamepad logo-icon"></i></a>
-        </div>
-        <div class="header-center"><nav>
-            <a href="index.html" class="nav-link ">الرئيسية</a>
-            <a href="games.html" class="nav-link ">ألعاب PC</a>
-            <a href="subscriptions.html" class="nav-link ">اشتراكات</a>
-            <a href="charging.html" class="nav-link active">شحن</a>
-            <a href="discord.html" class="nav-link ">Nitro</a>
-            <a href="contact.html" class="nav-link ">تواصل معنا</a>
-        </nav></div>
-        <div class="header-left">
-            <div class="search-container"><i class="fas fa-search search-icon"></i><input type="text" class="search-input" placeholder="ابحث عن الالعاب..."></div>
-            <a href="#" class="action-btn" onclick="event.preventDefault(); toggleCart(true);"><span class="cart-count">0</span>السله <i class="fas fa-shopping-cart"></i></a>
-            <a href="#" class="action-btn" onclick="event.preventDefault(); toggleOrders(true);">طلباتي <i class="fas fa-box-open"></i></a>
-            <button id="loginBtn" class="action-btn" type="button">تسجيل دخول</button>
-        </div>
-    </header>
+<header class="custom-header">
+  <a href="index.html" class="logo">DS STORE <i class="fas fa-gamepad"></i></a>
+  <div class="header-center">
+    <nav>
+      <a href="index.html" class="nav-link">الرئيسية</a>
+      <a href="games.html" class="nav-link">ألعاب PC</a>
+      <a href="subscriptions.html" class="nav-link">اشتراكات</a>
+      <a href="charging.html" class="nav-link">شحن</a>
+      <a href="discord.html" class="nav-link">Nitro</a>
+      <a href="contact.html" class="nav-link active">تواصل معنا</a>
+    </nav>
+  </div>
+  <div class="header-left">
+    <div class="search-container"><i class="fas fa-search search-icon"></i><input type="text" class="search-input" placeholder="ابحث عن الالعاب..."></div>
+    <a href="#" class="action-btn"><span class="cart-count">0</span>السلة <i class="fas fa-shopping-cart"></i></a>
+    <a href="#" class="action-btn">طلباتي <i class="fas fa-box-open"></i></a>
+    <button class="action-btn">تسجيل دخول</button>
+  </div>
+</header>
 
-    <div class="main-contact-container">
-        <h1 class="contact-title">تواصل معنا</h1>
-        <p style="color: var(--text-gray);">نحن هنا لمساعدتك في أي وقت</p>
-
-        <div class="cards-wrapper">
-            
-            <div class="container">
-                <div class="card">
-                    <div class="front">
-                        <div class="card-top"><p style="font-size: 14px; margin:0;">Support</p></div>
-                        <i class="fab fa-whatsapp" style="font-size: 80px; color: #25D366;"></i>
-                        <p class="heading">الدعم الفني</p>
-                        <p class="follow">للمساعدة بخصوص الطلبات والاستفسارات</p>
-                    </div>
-                    <div class="back">
-                        <p class="heading">تحدث معنا</p>
-                        <p class="follow">اضغط على الأيقونة للتحويل للواتساب</p>
-                        <div class="icons">
-                            <a href="https://wa.me/201156877865"><i class="fab fa-whatsapp fa-3x"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container">
-                <div class="card">
-                    <div class="front">
-                        <div class="card-top"><p style="font-size: 14px; margin:0;">Social Media</p></div>
-                        <i class="fas fa-share-alt" style="font-size: 80px; color: var(--page-color);"></i>
-                        <p class="heading">تابعنا</p>
-                        <p class="follow">ليصلك كل جديد عن العروض والخصومات</p>
-                    </div>
-                    <div class="back">
-                        <p class="heading">حساباتنا</p>
-                        <div class="icons">
-                            <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
-                            <a href="#"><i class="fab fa-instagram fa-2x"></i></a>
-                            <a href="#"><i class="fab fa-tiktok fa-2x"></i></a>
-                            <a href="#"><i class="fab fa-discord fa-2x"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-
-  <div class="mobile-sidebar" id="mobileSidebar">
-        <div class="sidebar-header">
-            <h3>القائمة</h3>
-            <span class="close-sidebar" onclick="toggleSidebar()">&times;</span>
-        </div>
-        <div class="sidebar-content">
-            <a href="index.html" class="sidebar-link"><i class="fas fa-home"></i> الرئيسية</a>
-            <a href="games.html" class="sidebar-link"><i class="fas fa-gamepad"></i> ألعاب PC</a>
-            <a href="subscriptions.html" class="sidebar-link"><i class="fas fa-crown"></i> اشتراكات</a>
-            <a href="charging.html" class="sidebar-link"><i class="fas fa-bolt"></i> شحن</a>
-            <a href="discord.html" class="sidebar-link"><i class="fab fa-discord"></i> Nitro</a>
-            <a href="contact.html" class="sidebar-link"><i class="fas fa-headset"></i> تواصل معنا</a>
-        </div>
-    </div>
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-
-
-<script>
-  // Header helpers (for pages without full cart/orders modals)
-  function toggleSidebar(){
-    const s=document.getElementById('mobileSidebar'), o=document.getElementById('sidebarOverlay');
-    if(!s||!o) return;
-    s.classList.toggle('active');
-    o.classList.toggle('active');
-  }
-  function toggleCart(){ window.location.href='index.html'; }
-  function toggleOrders(){ window.location.href='index.html'; }
-  (function(){
-    try {
-      const cart = JSON.parse(localStorage.getItem('ds_cart')||'[]');
-      document.querySelectorAll('.cart-count').forEach(b=>b.textContent=cart.length);
-    } catch(e) {}
-  })();
-</script>
-<script type="module" src="auth-modal.js"></script>
-
-<script>
-  // Auto-highlight the current page link in the header + sidebar
-  (function(){
-    function normalizeHref(href){
-      if(!href) return "";
-      const clean = href.split('#')[0].split('?')[0];
-      return clean.split('/').pop();
-    }
-
-    function currentPage(){
-      let p = (window.location.pathname || "").split('/').pop();
-      p = p.split('#')[0].split('?')[0];
-      if(!p) p = "index.html";
-      return p;
-    }
-
-    function markActive(selector){
-      const cur = currentPage();
-      document.querySelectorAll(selector).forEach(a => {
-        const target = normalizeHref(a.getAttribute('href'));
-        if(!target) return;
-        if(target === cur || (cur === "index.html" && (target === "" || target === "/"))){
-          a.classList.add('active');
-        }
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', function(){
-      markActive('a.nav-link');
-      markActive('a.sidebar-link');
-    });
-  })();
-</script>
+<div class="main-contact-container">
+  <h1 class="contact-title">تواصل معنا</h1>
+  <p style="color: var(--text-gray);">نحن هنا لمساعدتك في أي وقت</p>
+  <div class="cards-wrapper">
+    <div class="container"><div class="card"><div class="front"><div class="card-top"><p style="font-size:14px;margin:0;">Support</p></div><i class="fab fa-whatsapp" style="font-size:80px;color:#25D366;"></i><p class="heading">الدعم الفني</p><p class="follow">للمساعدة بخصوص الطلبات والاستفسارات</p></div><div class="back"><p class="heading">تحدث معنا</p><p class="follow">اضغط على الأيقونة للتحويل للواتساب</p><div class="icons"><a href="https://wa.me/201156877865"><i class="fab fa-whatsapp fa-3x"></i></a></div></div></div></div>
+    <div class="container"><div class="card"><div class="front"><div class="card-top"><p style="font-size:14px;margin:0;">Social Media</p></div><i class="fas fa-share-alt" style="font-size:80px;color:var(--page-color);"></i><p class="heading">تابعنا</p><p class="follow">ليصلك كل جديد عن العروض والخصومات</p></div><div class="back"><p class="heading">حساباتنا</p><div class="icons"><a href="#"><i class="fab fa-facebook fa-2x"></i></a><a href="#"><i class="fab fa-instagram fa-2x"></i></a><a href="#"><i class="fab fa-tiktok fa-2x"></i></a><a href="#"><i class="fab fa-discord fa-2x"></i></a></div></div></div></div>
+  </div>
+</div>
 
 </body>
 </html>
